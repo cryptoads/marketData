@@ -1,0 +1,13 @@
+{
+  "name": "marketShare",
+  "version": "1.0.0",
+  "description": "compare cme and bakkt btc futures volume",
+  "main": "index.js",
+  "repository": "null",
+  "author": "Matteo Bruni",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "aws-sdk": "^2.562.0"
+  }
+}
