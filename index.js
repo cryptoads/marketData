@@ -1,32 +1,32 @@
 const https = require("https");
 
 const AWS = require('aws-sdk');
-const dynamodb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
+//const dynamodb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
  
-function saveItem(msObj){
-    return dynamodb.putItem(
-        {
-            TableName: "marketShare",
-            Item: {
-                timestamp:{
-                    N: Date.now().toString()
-                },
-                bt: {
-                    N: msObj.bt.toString()
-                },
-                ct: {
-                    N: msObj.ct.toString()
-                },
-                msp: {
-                    N: msObj.msp.toString()
-                },
-                mspRounded: {
-                    S: msObj.mspRounded
-                }
-            }
-        }
-    ).promise();
-}
+// function saveItem(msObj){
+//     return dynamodb.putItem(
+//         {
+//             TableName: "marketShare",
+//             Item: {
+//                 timestamp:{
+//                     N: Date.now().toString()
+//                 },
+//                 bt: {
+//                     N: msObj.bt.toString()
+//                 },
+//                 ct: {
+//                     N: msObj.ct.toString()
+//                 },
+//                 msp: {
+//                     N: msObj.msp.toString()
+//                 },
+//                 mspRounded: {
+//                     S: msObj.mspRounded
+//                 }
+//             }
+//         }
+//     ).promise();
+// }
 
 function makeRequest(url) {
     return new Promise((resolve, reject) => {
@@ -83,10 +83,15 @@ async function main() {
 exports.handler = async (event) => {
 
     const response = await main();
-    await saveItem(response);
+    // await saveItem(response);
 
     return {
         statusCode: 200,
+        headers: {
+            "Access-Control-Allow-Headers" : "Content-Type",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET"
+        },
         body: JSON.stringify(response)
 
     };
