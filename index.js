@@ -44,6 +44,8 @@ function makeRequest(url) {
     })
 }
 
+
+//https://s3.amazonaws.com/data.ledgerx.com/json/2020-09-19.json
 async function getBakktTotal() {
     let url = "https://www.theice.com/marketdata/DelayedMarkets.shtml?getContractsAsJson=&productId=23808&hubId=26066";
     let data = await makeRequest(url);
@@ -51,7 +53,6 @@ async function getBakktTotal() {
     data.forEach(quote => {
         total += quote.volume
     });
-
     console.log("Bakkt: ", total);
     return (total);
 }
